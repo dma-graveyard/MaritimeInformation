@@ -87,6 +87,8 @@ public class ResponseTest {
 		
 		Assert.assertEquals(sentDate.getTime(), response.getSendDate().getTime());
 		
+		Assert.assertEquals(response.getBundle().getMessages().size(), 2);
+		
 		MaritimeInformationBundle bundle = response.getBundle();
 		for (MaritimeInformationMessage message : bundle.getMessages()) {
 			if (message instanceof MsiMessage) {

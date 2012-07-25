@@ -62,9 +62,11 @@
 
 
 	<target name="schemas" depends="compile">
-		<delete dir="schemas" />
-		<mkdir dir="schemas" />
+		<delete>
+			<fileset dir="schemas" includes="*.xsd" />
+		</delete>
 		<schemagen srcdir="${src.main.java.dir}" destdir="schemas" includeantruntime="false" />
+		<move file="schemas/schema1.xsd" tofile="schemas/marinf.xsd" />
 	</target>
 
 	<target name="all" depends="compile,jar,schemas" />

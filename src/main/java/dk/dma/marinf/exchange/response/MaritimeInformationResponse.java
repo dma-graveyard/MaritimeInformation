@@ -27,6 +27,7 @@ import dk.dma.marinf.message.NoticeMessage;
 /**
  * A response containing a bundle of maritime information messages
  */
+
 @XmlRootElement
 @XmlSeeAlso({MsiMessage.class, NoticeMessage.class})
 public class MaritimeInformationResponse {

@@ -15,6 +15,7 @@
  */
 package dk.dma.marinf.message;
 
+
 /**
  * Maritime Safety Information Message
  */

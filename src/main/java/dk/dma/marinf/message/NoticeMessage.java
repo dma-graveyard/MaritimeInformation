@@ -15,6 +15,7 @@
  */
 package dk.dma.marinf.message;
 
+
 /**
  * Notice-to-mariners message
  */

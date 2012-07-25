@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="maritimeInformationBundle" type="maritimeInformationBundle"/>
+
+  <xs:element name="maritimeInformationRequest" type="maritimeInformationRequest"/>
+
+  <xs:element name="maritimeInformationResponse" type="maritimeInformationResponse"/>
+
+  <xs:complexType name="maritimeInformationBundle">
+    <xs:sequence>
+      <xs:element name="messages" type="maritimeInformationMessage" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="maritimeInformationMessage" abstract="true">
+    <xs:sequence/>
+    <xs:attribute name="uid" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="maritimeInformationRequest">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="maritimeInformationResponse">
+    <xs:sequence>
+      <xs:element name="bundle" type="maritimeInformationBundle" minOccurs="0"/>
+      <xs:element name="sendDate" type="xs:dateTime" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="msiMessage">
+    <xs:complexContent>
+      <xs:extension base="maritimeInformationMessage">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="noticeMessage">
+    <xs:complexContent>
+      <xs:extension base="maritimeInformationMessage">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:schema>
+
