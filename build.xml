@@ -10,6 +10,7 @@
 	<property name="src.dir" value="${basedir}/src" />
 	<property name="src.main.dir" value="${src.dir}/main" />
 	<property name="src.main.java.dir" value="${src.main.dir}/java" />
+	<property name="src.main.test.dir" value="${src.main.dir}/test" />
 
 	<taskdef name="schemagen" classname="com.sun.tools.jxc.SchemaGenTask">
 		<classpath>
@@ -36,6 +37,7 @@
 			<compilerarg value="-Xlint:all,-path,-serial" />
 			<classpath refid="compile.class.path" />
 			<src path="${src.main.java.dir}" />
+			<src path="${src.main.test.dir}" />
 		</javac>
 	</target>
 
@@ -45,12 +47,26 @@
 		</jar>
 	</target>
 
+	<target name="test" depends="compile" description="run all tests">
+		<junit fork="true">
+			<classpath path="${build.classes.dir}" />
+			<classpath refid="compile.class.path" />
+			<formatter type="plain" usefile="false" />
+			<batchtest haltonerror="true" haltonfailure="true">
+				<fileset dir="${src.main.test.dir}">
+					<include name="**/*Test.java" />
+				</fileset>
+			</batchtest>
+		</junit>
+	</target>
+
+
 	<target name="schemas" depends="compile">
-		<delete dir="schemas"/>
-		<mkdir dir="schemas"/>
+		<delete dir="schemas" />
+		<mkdir dir="schemas" />
 		<schemagen srcdir="${src.main.java.dir}" destdir="schemas" />
 	</target>
-	
+
 	<target name="all" depends="compile,jar,schemas" />
 
 </project>
