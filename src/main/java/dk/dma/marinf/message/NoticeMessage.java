@@ -16,12 +16,12 @@
 package dk.dma.marinf.message;
 
 /**
- * Maritime Safety Information Message
+ * Notice-to-mariners message
  */
-public class MsiMessage extends MaritimeInformationMessage {
+public class NoticeMessage extends MaritimeInformationMessage {
 	
-	public MsiMessage() {
+	public NoticeMessage() {
 		super();
 	}
-	
+
 }

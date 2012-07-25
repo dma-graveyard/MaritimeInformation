@@ -1,0 +1,6 @@
+This library includes the following software
+
+JUnit 4.8 (junit-4.8.jar)
+   Common Public License - v 1.0
+   http://www.junit.org/
+   

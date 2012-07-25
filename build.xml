@@ -64,7 +64,7 @@
 	<target name="schemas" depends="compile">
 		<delete dir="schemas" />
 		<mkdir dir="schemas" />
-		<schemagen srcdir="${src.main.java.dir}" destdir="schemas" />
+		<schemagen srcdir="${src.main.java.dir}" destdir="schemas" includeantruntime="false" />
 	</target>
 
 	<target name="all" depends="compile,jar,schemas" />
