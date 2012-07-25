@@ -18,7 +18,9 @@ package dk.dma.marinf.exchange;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import dk.dma.marinf.message.MaritimeInformationMessage;
@@ -27,24 +29,25 @@ import dk.dma.marinf.message.MaritimeInformationMessage;
  * Class to hold a bundle of messages
  */
 @XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class MaritimeInformationBundle {
-	
+
+	@XmlElement(required = true)
 	private List<MaritimeInformationMessage> messages = new ArrayList<MaritimeInformationMessage>();
-	
-	public MaritimeInformationBundle() {		
+
+	public MaritimeInformationBundle() {
 	}
 	
-	@XmlAttribute(required=true)
 	public List<MaritimeInformationMessage> getMessages() {
 		return messages;
 	}
-	
+
 	public void setMessages(List<MaritimeInformationMessage> messages) {
 		this.messages = messages;
 	}
-	
+
 	public void addMessage(MaritimeInformationMessage message) {
 		messages.add(message);
-	}	
+	}
 
 }

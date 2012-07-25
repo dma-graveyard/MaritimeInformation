@@ -15,20 +15,23 @@
  */
 package dk.dma.marinf.message;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 
 /**
  * Base abstract class for maritime information messages
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 public abstract class MaritimeInformationMessage {
-		
+
+	@XmlAttribute(required = true)
 	protected String uid;
 	
 	public MaritimeInformationMessage() {
 		
 	}
 	
-	@XmlAttribute(required=true)
 	public String getUid() {
 		return uid;
 	}
