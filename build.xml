@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="marinf" default="all">
+
+	<property name="lib" value="${basedir}/lib" />
+
+	<property name="build.dir" value="${basedir}/build" />
+	<property name="build.classes.dir" value="${build.dir}/classes" />
+	<property name="build.final.name" value="${ant.project.name}.jar" />
+
+	<property name="src.dir" value="${basedir}/src" />
+	<property name="src.main.dir" value="${src.dir}/main" />
+	<property name="src.main.java.dir" value="${src.main.dir}/java" />
+
+	<taskdef name="schemagen" classname="com.sun.tools.jxc.SchemaGenTask">
+		<classpath>
+			<fileset dir="${lib}" includes="*.jar" />
+		</classpath>
+	</taskdef>
+
+	<path id="compile.class.path">
+		<fileset dir="${lib}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<target name="init">
+		<mkdir dir="${build.classes.dir}" />
+	</target>
+
+	<target name="clean">
+		<delete dir="${build.dir}" />
+	</target>
+
+	<target name="compile" depends="init">
+		<javac destdir="${build.classes.dir}" debug="on" encoding="UTF-8" includeantruntime="false">
+			<compilerarg value="-Xlint:all,-path,-serial" />
+			<classpath refid="compile.class.path" />
+			<src path="${src.main.java.dir}" />
+		</javac>
+	</target>
+
+	<target name="jar" depends="compile">
+		<jar file="${build.final.name}">
+			<fileset dir="${build.classes.dir}" />
+		</jar>
+	</target>
+
+	<target name="schemas" depends="compile">
+		<delete dir="schemas"/>
+		<mkdir dir="schemas"/>
+		<schemagen srcdir="${src.main.java.dir}" destdir="schemas" />
+	</target>
+	
+	<target name="all" depends="compile,jar,schemas" />
+
+</project>
