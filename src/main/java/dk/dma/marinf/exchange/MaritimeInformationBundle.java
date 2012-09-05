@@ -16,6 +16,7 @@
 package dk.dma.marinf.exchange;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -34,6 +35,10 @@ public class MaritimeInformationBundle {
 
 	@XmlElement(required = true)
 	private List<MaritimeInformationMessage> messages = new ArrayList<MaritimeInformationMessage>();
+	@XmlElement(required = true)
+	private Date created;
+	@XmlElement(required = true)
+	private MaritimeInformationProvider provider;
 
 	public MaritimeInformationBundle() {
 	}
@@ -48,6 +53,22 @@ public class MaritimeInformationBundle {
 
 	public void addMessage(MaritimeInformationMessage message) {
 		messages.add(message);
+	}
+	
+	public Date getCreated() {
+		return created;
+	}
+	
+	public void setCreated(Date created) {
+		this.created = created;
+	}
+	
+	public MaritimeInformationProvider getProvider() {
+		return provider;
+	}
+	
+	public void setProvider(MaritimeInformationProvider provider) {
+		this.provider = provider;
 	}
 
 }
