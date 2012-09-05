@@ -15,39 +15,11 @@
  */
 package dk.dma.marinf.message;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-
-
 /**
- * Maritime Safety Information Message
+ * NtM types
  */
-@XmlAccessorType(XmlAccessType.FIELD)
-public class MsiMessage extends MaritimeInformationMessage {
+public enum NoticeType {
 	
-	@XmlAttribute(required = true)
-	private MsiMessageType type;
-	private NavtexMessage navtexMessage;
-	
-	public MsiMessage() {
-		super();
-	}
+	TEMPORARY, PRELIMINARY, PERMANENT, ANNOUNCEMENT;
 
-	public MsiMessageType getType() {
-		return type;
-	}
-
-	public void setType(MsiMessageType type) {
-		this.type = type;
-	}
-
-	public NavtexMessage getNavtexMessage() {
-		return navtexMessage;
-	}
-
-	public void setNavtexMessage(NavtexMessage navtexMessage) {
-		this.navtexMessage = navtexMessage;
-	}
-	
 }

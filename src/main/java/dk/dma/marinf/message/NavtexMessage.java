@@ -19,35 +19,35 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 
-
 /**
- * Maritime Safety Information Message
+ * Navtex message
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-public class MsiMessage extends MaritimeInformationMessage {
-	
+public class NavtexMessage {
+
 	@XmlAttribute(required = true)
-	private MsiMessageType type;
-	private NavtexMessage navtexMessage;
-	
-	public MsiMessage() {
-		super();
+	private String navtexText;
+	@XmlAttribute(required = true)
+	private String navtexNo;
+
+	public NavtexMessage() {
+		
 	}
 
-	public MsiMessageType getType() {
-		return type;
+	public String getNavtexText() {
+		return navtexText;
 	}
 
-	public void setType(MsiMessageType type) {
-		this.type = type;
+	public void setNavtexText(String navtexText) {
+		this.navtexText = navtexText;
 	}
 
-	public NavtexMessage getNavtexMessage() {
-		return navtexMessage;
+	public String getNavtexNo() {
+		return navtexNo;
 	}
 
-	public void setNavtexMessage(NavtexMessage navtexMessage) {
-		this.navtexMessage = navtexMessage;
+	public void setNavtexNo(String navtexNo) {
+		this.navtexNo = navtexNo;
 	}
-	
+
 }

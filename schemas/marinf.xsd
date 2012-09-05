@@ -14,8 +14,77 @@
   </xs:complexType>
 
   <xs:complexType name="maritimeInformationMessage" abstract="true">
-    <xs:sequence/>
+    <xs:sequence>
+      <xs:element name="localText" type="xs:string" minOccurs="0"/>
+      <xs:element name="validFrom" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="validTo" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="sources" type="maritimeInformationMessageSource" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="publisher" type="maritimeInformationMessagePublisher" minOccurs="0"/>
+      <xs:element name="charts" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="updated" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="cancelled" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="references" type="maritimeInformationMessage" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="locations" type="maritimeInformationMessageLocation" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
     <xs:attribute name="uid" type="xs:string" use="required"/>
+    <xs:attribute name="version" type="xs:int" use="required"/>
+    <xs:attribute name="refNo" type="xs:string" use="required"/>
+    <xs:attribute name="status" type="maritimeInformationMessageStatus" use="required"/>
+    <xs:attribute name="text" type="xs:string" use="required"/>
+    <xs:attribute name="created" type="xs:dateTime" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="maritimeInformationMessageSource">
+    <xs:sequence/>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="country" type="xs:string" use="required"/>
+    <xs:attribute name="date" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="maritimeInformationMessagePublisher">
+    <xs:sequence/>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="description" type="xs:string" use="required"/>
+    <xs:attribute name="country" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="maritimeInformationMessageLocation">
+    <xs:sequence>
+      <xs:element name="subArea" type="xs:string" minOccurs="0"/>
+      <xs:element name="label" type="xs:string" minOccurs="0"/>
+      <xs:element name="details" type="xs:string" minOccurs="0"/>
+      <xs:element name="mainAreas" type="maritimeMainArea" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="positions" type="maritimeInformationMessagePosition" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="type" type="maritimeInformationMessageLocationType" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="maritimeMainArea">
+    <xs:sequence>
+      <xs:element name="country" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="surfaces" type="surface" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:int" use="required"/>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="description" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="surface">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="maritimeInformationMessagePosition">
+    <xs:complexContent>
+      <xs:extension base="position">
+        <xs:sequence/>
+        <xs:attribute name="radius" type="xs:double" use="required"/>
+        <xs:attribute name="precision" type="xs:double" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="position">
+    <xs:sequence/>
   </xs:complexType>
 
   <xs:complexType name="maritimeInformationRequest">
@@ -32,17 +101,62 @@
   <xs:complexType name="msiMessage">
     <xs:complexContent>
       <xs:extension base="maritimeInformationMessage">
-        <xs:sequence/>
+        <xs:sequence>
+          <xs:element name="navtexMessage" type="navtexMessage" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="type" type="msiMessageType" use="required"/>
       </xs:extension>
     </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="navtexMessage">
+    <xs:sequence/>
+    <xs:attribute name="navtexText" type="xs:string" use="required"/>
+    <xs:attribute name="navtexNo" type="xs:string" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="noticeMessage">
     <xs:complexContent>
       <xs:extension base="maritimeInformationMessage">
         <xs:sequence/>
+        <xs:attribute name="type" type="noticeType" use="required"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+
+  <xs:simpleType name="maritimeInformationMessageStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ACTIVE"/>
+      <xs:enumeration value="CANCELLED"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="maritimeInformationMessageLocationType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="GENERAL"/>
+      <xs:enumeration value="POSITION"/>
+      <xs:enumeration value="POSITIONS"/>
+      <xs:enumeration value="POLYGON"/>
+      <xs:enumeration value="POLYLINE"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="msiMessageType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NAVAREA"/>
+      <xs:enumeration value="SUBAREA"/>
+      <xs:enumeration value="COASTAL"/>
+      <xs:enumeration value="LOCAL"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="noticeType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="TEMPORARY"/>
+      <xs:enumeration value="PRELIMINARY"/>
+      <xs:enumeration value="PERMANENT"/>
+      <xs:enumeration value="ANNOUNCEMENT"/>
+    </xs:restriction>
+  </xs:simpleType>
 </xs:schema>
 

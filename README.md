@@ -30,6 +30,12 @@ To run tests. All tests with filename *Test.java will be executed.
 Make a distributable JAR file in project root
 
 	ant jar
+	
+### Schemas ###
+
+To create XSD files
+
+	ant schemas  
  
 ### License ###
 

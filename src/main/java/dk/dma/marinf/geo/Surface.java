@@ -13,32 +13,13 @@
  * You should have received a copy of the GNU General Public License
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
-package dk.dma.marinf.message;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-
+package dk.dma.marinf.geo;
 
 /**
- * Notice-to-mariners message
+ * Class to represent an area on the surface of the earth
  */
-@XmlAccessorType(XmlAccessType.FIELD)
-public class NoticeMessage extends MaritimeInformationMessage {
+public class Surface {
 	
-	@XmlAttribute(required = true)
-	private NoticeType type;
-	
-	public NoticeMessage() {
-		super();
-	}
-	
-	public NoticeType getType() {
-		return type;
-	}
-	
-	public void setType(NoticeType type) {
-		this.type = type;
-	}
+	// TODO
 
 }

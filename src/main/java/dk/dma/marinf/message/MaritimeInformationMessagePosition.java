@@ -19,35 +19,37 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 
+import dk.dma.marinf.geo.Position;
 
 /**
- * Maritime Safety Information Message
+ * Extended position class
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-public class MsiMessage extends MaritimeInformationMessage {
+public class MaritimeInformationMessagePosition extends Position {
 	
 	@XmlAttribute(required = true)
-	private MsiMessageType type;
-	private NavtexMessage navtexMessage;
+	private double radius;
+	@XmlAttribute(required = true)
+	private  double precision;
 	
-	public MsiMessage() {
-		super();
+	public MaritimeInformationMessagePosition() {
+		
 	}
 
-	public MsiMessageType getType() {
-		return type;
+	public double getRadius() {
+		return radius;
 	}
 
-	public void setType(MsiMessageType type) {
-		this.type = type;
+	public void setRadius(double radius) {
+		this.radius = radius;
 	}
 
-	public NavtexMessage getNavtexMessage() {
-		return navtexMessage;
+	public double getPrecision() {
+		return precision;
 	}
 
-	public void setNavtexMessage(NavtexMessage navtexMessage) {
-		this.navtexMessage = navtexMessage;
+	public void setPrecision(double precision) {
+		this.precision = precision;
 	}
 	
 }
